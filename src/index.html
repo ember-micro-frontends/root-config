@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ember Microfrontends</title>
+    <meta name="importmap-type" content="systemjs-importmap" />
+    <script
+      type="systemjs-importmap"
+      src="https://storage.googleapis.com/react.microfrontends.app/importmap.json"
+    ></script>
+
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "root-config": "http://localhost:9000/root-application.js"
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/amd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/named-exports.min.js"></script>
+  </head>
+  <body>
+    <script>
+      System.import("root-config");
+      System.import("@react-mf/styleguide");
+    </script>
+    <template id="single-spa-layout">
+      <single-spa-router>
+        <nav class="topnav">
+          <div
+            class="h-16 flex items-center justify-between px-6 bg-primary text-white"
+          >
+            <div class="flex items-center justify-between">
+              <a class="p-6" href="/">Home</a>
+              <a class="p-6" href="/people">People</a>
+              <a class="p-6" href="/planets">Planets</a>
+            </div>
+            <div class="flex items-center justify-between">
+              <a
+                href="https://github.com/rajasegar/ember-micro-frontends"
+                class="externalLink"
+                >Github project</a
+              >
+            </div>
+          </div>
+        </nav>
+        <div class="main-content mt-16">
+          <route path="people">
+            <application name="people"></application>
+            <div id="people"></div>
+          </route>
+          <route path="planets">
+            <application name="planets"></application>
+            <div id="planets"></div>
+          </route>
+          <route default>
+            <h1 class="flex flex-row justify-center p-16">
+              <p class="max-w-md">
+                This example project shows independently built and deployed
+                microfrontends that use Ember and single-spa. Each nav link
+                above takes you to a different microfrontend.
+              </p>
+            </h1>
+          </route>
+        </div>
+      </single-spa-router>
+    </template>
+    <import-map-overrides-full
+      show-when-local-storage="devtools"
+      dev-libs
+    ></import-map-overrides-full>
+  </body>
+</html>
