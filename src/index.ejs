@@ -6,15 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Ember Microfrontends</title>
     <meta name="importmap-type" content="systemjs-importmap" />
-    <script
-      type="systemjs-importmap"
-      src="https://storage.googleapis.com/react.microfrontends.app/importmap.json"
-    ></script>
 
     <script type="systemjs-importmap">
       {
         "imports": {
-          "root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js"
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.6.1/lib/system/single-spa.min.js",
+          "root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js",
+          "@ember-mf/styleguide": "https://ember-micro-frontends.github.io/styleguide/ember-mf-styleguide.js"
         }
       }
     </script>
@@ -22,9 +20,10 @@
      <% if (isLocal) { %>
     <script type="systemjs-importmap">
     {
-    "imports": {
-    "root-config": "http://localhost:9000/root-application.js"
-    }
+      "imports": {
+        "root-config": "http://localhost:9000/root-application.js",
+        "@ember-mf/styleguide": "http://localhost:8080/ember-mf-styleguide.js"
+      }
     }
     </script>
     <% } %>
@@ -37,7 +36,7 @@
     <template id="single-spa-layout">
       <single-spa-router>
         <nav class="topnav">
-          <application name="navbar"></application>
+          <application name="navbar" loader="topNav" error="topNav"></application>
           <div id="navbar"></div>
         </nav>
         <div class="main-content mt-16">
@@ -63,7 +62,7 @@
     </template>
     <script>
       System.import("root-config");
-      System.import("@react-mf/styleguide");
+      System.import("@ember-mf/styleguide");
     </script>
     <import-map-overrides-full
       show-when-local-storage="devtools"

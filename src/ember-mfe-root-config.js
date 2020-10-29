@@ -31,7 +31,7 @@ const navbarApp = registerApplication(
 );
 
 const planetsDomain = isLocal
-  ? "http://localhost:4201/planets"
+  ? "http://localhost:4202/planets"
   : "https://ember-micro-frontends.github.io/planets";
 const planetsApp = registerApplication(
   "planets",
@@ -45,7 +45,7 @@ const planetsApp = registerApplication(
 );
 
 const peopleDomain = isLocal
-  ? "http://localhost:4202/people"
+  ? "http://localhost:4201/people"
   : "https://ember-micro-frontends.github.io/people";
 const peopleApp = registerApplication(
   "people",
