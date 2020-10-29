@@ -5,7 +5,8 @@
     "lint": "eslint src --ext js",
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "deploy": "git push && npm run build && surge ./dist ember-micro-frontends.surge.sh"
   },
   "husky": {
     "hooks": {
@@ -26,6 +27,7 @@
     "eslint-config-important-stuff": "^1.1.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.0.4",
     "husky": "^4.2.3",
     "jest": "^25.2.7",
@@ -40,6 +42,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.2.1",
     "single-spa": "^5.3.1",
     "single-spa-ember": "^0.2.0",
