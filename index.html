@@ -6,61 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Ember Microfrontends</title>
     <meta name="importmap-type" content="systemjs-importmap" />
-    <script
-      type="systemjs-importmap"
-      src="https://storage.googleapis.com/react.microfrontends.app/importmap.json"
-    ></script>
-    <script type="systemjs-importmap">
-      {
-        "imports": {
-          "root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js"
-        }
-      }
-    </script>
- 
+    <script type="systemjs-importmap" src="https://storage.googleapis.com/react.microfrontends.app/importmap.json" ></script>
+
     <!--<script type="systemjs-importmap">-->
       <!--{-->
         <!--"imports": {-->
-          <!--"root-config": "http://localhost:9000/root-application.js"-->
+          <!--"root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js"-->
         <!--}-->
       <!--}-->
     <!--</script>-->
+ 
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "root-config": "http://localhost:9000/root-application.js"
+        }
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/amd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/named-exports.min.js"></script>
   </head>
   <body>
-    <script>
-      System.import("root-config");
-      System.import("@react-mf/styleguide");
-    </script>
     <template id="single-spa-layout">
       <single-spa-router>
-        <nav class="topnav">
-          <div
-            class="h-16 flex items-center justify-between px-6 bg-primary text-white"
-          >
-            <div class="flex items-center justify-between">
-              <a class="p-6" href="/">Home</a>
-              <a class="p-6" href="/root-config/people">People</a>
-              <a class="p-6" href="/root-config/planets">Planets</a>
-            </div>
-            <div class="flex items-center justify-between">
-              <a
-                href="https://github.com/rajasegar/ember-micro-frontends"
-                class="externalLink"
-                >Github project</a
-              >
-            </div>
-          </div>
-        </nav>
+         <nav class="topnav">
+        <application name="navbar"></application>
+            <div id="navbar"></div>
+      </nav>
         <div class="main-content mt-16">
-          <route path="root-config/people">
+          <route path="people">
             <application name="people"></application>
             <div id="people"></div>
           </route>
-          <route path="root-config/planets">
+          <route path="planets">
             <application name="planets"></application>
             <div id="planets"></div>
           </route>
@@ -76,9 +56,11 @@
         </div>
       </single-spa-router>
     </template>
-    <import-map-overrides-full
-      show-when-local-storage="devtools"
-      dev-libs
-    ></import-map-overrides-full>
+    <import-map-overrides-full show-when-local-storage="devtools" dev-libs ></import-map-overrides-full>
+        <script>
+      System.import("root-config");
+      System.import("@react-mf/styleguide");
+    </script>
+
   </body>
 </html>
