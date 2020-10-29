@@ -6,6 +6,7 @@ import {
 } from "single-spa-layout";
 import { loadEmberApp } from "single-spa-ember";
 
+const isLocal = false;
 const routes = constructRoutes(document.querySelector("#single-spa-layout"), {
   loaders: {
     topNav: "<h1>Loading topnav</h1>",
@@ -15,82 +16,47 @@ const routes = constructRoutes(document.querySelector("#single-spa-layout"), {
   },
 });
 
-/*
+const navbarDomain = isLocal
+  ? "http://localhost:4200"
+  : "https://ember-micro-frontends.github.io/navbar";
 const navbarApp = registerApplication(
   "navbar",
   () => {
     const appName = "navbar";
-    const appUrl = "http://localhost:4200/assets/navbar.js";
-    const vendorUrl = "http://localhost:4200/assets/vendor.js";
-    return loadEmberApp(appName, appUrl, vendorUrl);
-  },
-  (location) => location.pathname.startsWith("/")
-);
-*/
-const navbarApp = registerApplication(
-  "navbar",
-  () => {
-    const appName = "navbar";
-    const appUrl =
-      "https://ember-micro-frontends.github.io/navbar/assets/navbar.js";
-    const vendorUrl =
-      "https://ember-micro-frontends.github.io/navbar/assets/vendor.js";
+    const appUrl = `${navbarDomain}/assets/navbar.js`;
+    const vendorUrl = `${navbarDomain}/assets/vendor.js`;
     return loadEmberApp(appName, appUrl, vendorUrl);
   },
   (location) => location.pathname.startsWith("/")
 );
 
+const planetsDomain = isLocal
+  ? "http://localhost:4201/planets"
+  : "https://ember-micro-frontends.github.io/planets";
 const planetsApp = registerApplication(
   "planets",
   () => {
     const appName = "planets";
-    const appUrl =
-      "https://ember-micro-frontends.github.io/planets/assets/planets.js";
-    const vendorUrl =
-      "https://ember-micro-frontends.github.io/planets/assets/vendor.js";
+    const appUrl = `${planetsDomain}/assets/planets.js`;
+    const vendorUrl = `${planetsDomain}/assets/vendor.js`;
     return loadEmberApp(appName, appUrl, vendorUrl);
   },
   (location) => location.pathname.startsWith("/planets")
 );
 
-/*
-const planetsApp = registerApplication(
-  "planets",
-  () => {
-    const appName = "planets";
-    const appUrl = "http://localhost:4202/planets/assets/planets.js";
-    const vendorUrl = "http://localhost:4202/planets/assets/vendor.js";
-    return loadEmberApp(appName, appUrl, vendorUrl);
-  },
-  (location) => location.pathname.startsWith("/planets")
-);
-*/
-
+const peopleDomain = isLocal
+  ? "http://localhost:4202/people"
+  : "https://ember-micro-frontends.github.io/people";
 const peopleApp = registerApplication(
   "people",
   () => {
     const appName = "people";
-    const appUrl =
-      "https://ember-micro-frontends.github.io/people/assets/people.js";
-    const vendorUrl =
-      "https://ember-micro-frontends.github.io/people/assets/vendor.js";
+    const appUrl = `${peopleDomain}/assets/people.js`;
+    const vendorUrl = `${peopleDomain}/assets/vendor.js`;
     return loadEmberApp(appName, appUrl, vendorUrl);
   },
   (location) => location.pathname.startsWith("/people")
 );
-
-/*
-const peopleApp = registerApplication(
-  "people",
-  () => {
-    const appName = "people";
-    const appUrl = "http://localhost:4201/people/assets/people.js";
-    const vendorUrl = "http://localhost:4201/people/assets/vendor.js";
-    return loadEmberApp(appName, appUrl, vendorUrl);
-  },
-  (location) => location.pathname.startsWith("/people")
-);
-*/
 
 const applications = [];
 applications.concat(navbarApp);

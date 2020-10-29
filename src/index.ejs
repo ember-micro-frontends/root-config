@@ -19,13 +19,15 @@
       }
     </script>
 
-    <!--<script type="systemjs-importmap">-->
-    <!--{-->
-    <!--"imports": {-->
-    <!--"root-config": "http://localhost:9000/root-application.js"-->
-    <!--}-->
-    <!--}-->
-    <!--</script>-->
+     <% if (isLocal) { %>
+    <script type="systemjs-importmap">
+    {
+    "imports": {
+    "root-config": "http://localhost:9000/root-application.js"
+    }
+    }
+    </script>
+    <% } %>
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/amd.min.js"></script>
@@ -59,13 +61,13 @@
         </div>
       </single-spa-router>
     </template>
-    <import-map-overrides-full
-      show-when-local-storage="devtools"
-      dev-libs
-    ></import-map-overrides-full>
     <script>
       System.import("root-config");
       System.import("@react-mf/styleguide");
     </script>
+    <import-map-overrides-full
+      show-when-local-storage="devtools"
+      dev-libs
+    ></import-map-overrides-full>
   </body>
 </html>

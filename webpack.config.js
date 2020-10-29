@@ -1,56 +1,46 @@
-const CopyPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
-module.exports = {
-  entry: {
-    "root-application": "src/ember-mfe-root-config.js",
-  },
-  output: {
-    publicPath: "/dist/",
-    filename: "[name].js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        exclude: [path.resolve(__dirname, "node_modules")],
-        loader: "babel-loader",
-      },
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
-      },
-    ],
-  },
-  node: {
-    fs: "empty",
-  },
-  resolve: {
-    modules: [__dirname, "node_modules"],
-  },
-  optimization: {
-    splitChunks: {
-      name: "common-dependencies.js",
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = (env) => {
+  const result = {
+    entry: path.resolve(__dirname, "src/ember-mfe-root-config"),
+    output: {
+      filename: "root-application.js",
+      libraryTarget: "system",
+      path: path.resolve(__dirname, "dist"),
     },
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new CopyPlugin({
-      patterns: [
+    devtool: "sourcemap",
+    module: {
+      rules: [
+        { parser: { system: false } },
         {
-          from: path.join(__dirname, "src/index.html"),
-          to: path.join(__dirname, "dist"),
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [{ loader: "babel-loader" }],
         },
       ],
-    }),
-  ],
-  devtool: "source-map",
-  externals: [],
-  devServer: {
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, "dist"),
-    writeToDisk: true,
-    hot: true, //Hot module replacement
-  },
+    },
+    devServer: {
+      historyApiFallback: true,
+      disableHostCheck: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      https: false,
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        inject: false,
+        template: "src/index.ejs",
+        templateParameters: {
+          isLocal: env && env.isLocal === "true",
+        },
+      }),
+      new CleanWebpackPlugin(),
+    ],
+    externals: ["single-spa", /^@react-mf\/.+$/],
+  };
+
+  return result;
 };
