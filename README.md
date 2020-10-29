@@ -1,7 +1,8 @@
 # ember-micro-frontends
 
-Micro Frontends in Ember.js using single-spa
-https://single-spa.js.org/docs/ecosystem-ember
+Micro Frontends in Ember.js using [single-spa](https://single-spa.js.org/docs/ecosystem-ember)
+
+[Demo](https://ember-micro-frontends.surge.sh)
 
 ## Micro frontends
 
