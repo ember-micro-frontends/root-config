@@ -6,7 +6,7 @@
     "test": "cross-env BABEL_ENV=test jest --passWithNoTests",
     "format": "prettier --write \"./**\"",
     "build": "webpack --mode=production",
-    "deploy": "git push && npm run build && surge ./dist ember-micro-frontends.surge.sh"
+    "deploy": "git push && npm run build && cp dist/index.html dist/200.html && surge ./dist ember-micro-frontends.surge.sh"
   },
   "husky": {
     "hooks": {
