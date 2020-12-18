@@ -6,7 +6,7 @@ import {
 } from "single-spa-layout";
 import { loadEmberApp } from "single-spa-ember";
 
-const isLocal = true;
+const isLocal = false;
 const routes = constructRoutes(document.querySelector("#single-spa-layout"), {
   loaders: {
     topNav: "<h1>Loading topnav</h1>",
