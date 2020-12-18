@@ -10,8 +10,8 @@
     <script type="systemjs-importmap">
       {
         "imports": {
-          "root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js",
           "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.6.1/lib/system/single-spa.min.js",
+          "root-config": "https://ember-micro-frontends.github.io/root-config/root-application.js",
           "@ember-mf/styleguide": "https://ember-micro-frontends.github.io/styleguide/ember-mf-styleguide.js"
         }
       }
@@ -20,9 +20,9 @@
      <% if (isLocal) { %>
     <script type="systemjs-importmap">
     {
-    "imports": {
-    "root-config": "http://localhost:9000/root-application.js"
-    }
+      "imports": {
+        "root-config": "http://localhost:9000/root-application.js"
+      }
     }
     </script>
     <% } %>
@@ -35,7 +35,7 @@
     <template id="single-spa-layout">
       <single-spa-router>
         <nav class="topnav">
-          <application name="navbar"></application>
+          <application name="navbar" loader="topNav" error="topNav"></application>
           <div id="navbar"></div>
         </nav>
         <div class="main-content mt-16">
@@ -51,7 +51,7 @@
             <h1 class="flex flex-row justify-center p-16">
               <p class="max-w-md">
                 This example project shows independently built and deployed
-                microfrontends that use Ember and single-spa. Each nav link
+                microfrontends that use <a href="https://emberjs.com" target="_blank">Ember.js</a> and <a href="https://single-spa.js.org" target="_blank">single-spa</a>. Each nav link
                 above takes you to a different microfrontend.
               </p>
             </h1>
