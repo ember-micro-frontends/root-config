@@ -77,7 +77,7 @@ applications.concat(navbarApp);
 applications.concat(planetsApp);
 applications.concat(peopleApp);
 applications.concat(filmsApp);
-
+applications.forEach(registerApplication);
 const layoutEngine = constructLayoutEngine({ routes, applications });
 
 layoutEngine.activate();
